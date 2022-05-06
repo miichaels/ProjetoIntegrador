@@ -37,7 +37,7 @@ public class Produto {
 	private BigDecimal preco;
 	
 	@NotBlank
-	//private String foto;
+	private String foto;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")

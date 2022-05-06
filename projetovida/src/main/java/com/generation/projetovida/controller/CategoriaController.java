@@ -41,19 +41,24 @@ public class CategoriaController {
 				.orElse(ResponseEntity.notFound().build());	// se n tiver, da erro
 	}
 	
-	@GetMapping("/descricao/{descricao}") // metodo para pegar por uma descrica, vai usar uma rota /descricao e / para puxar o parametro
+	@GetMapping("/cursos/{cursos}") // metodo para pegar por uma descrica, vai usar uma rota /descricao e / para puxar o parametro
 	public ResponseEntity<List<Categoria>> GetByCategoria (@PathVariable String cursos){ 
 		return ResponseEntity.ok(repository.findAllByCursosContainingIgnoreCase(cursos)); // usa o metodo do CategoriaRepository
 	}
 	
+	@GetMapping("/produtos/{produtos}") // metodo para pegar por uma descrica, vai usar uma rota /descricao e / para puxar o parametro
+	public ResponseEntity<List<Categoria>> GetByProduto (@PathVariable String produtos){ 
+		return ResponseEntity.ok(repository.findAllByProdutosContainingIgnoreCase(produtos)); // usa o metodo do CategoriaRepository
+	}
+	
 	@PostMapping // metodo para postar alguma coisa, publicacao, postagem, vai usar a mesma rota principal
-	public ResponseEntity<Categoria> Post (@Valid @RequestBody Categoria cursos){ // faz requisição da body
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(cursos)); // salva a requisiçao
+	public ResponseEntity<Categoria> Post (@Valid @RequestBody Categoria categoria){ // faz requisição da body
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria)); // salva a requisiçao
 	}
 	
 	@PutMapping // metodo para atualizar dados ,vai usar a mesma rota principal
-	public ResponseEntity<Categoria> Put (@Valid @RequestBody Categoria cursos){ // faz requisição da body
-		return ResponseEntity.ok(repository.save(cursos));	 // atualiza a requisição
+	public ResponseEntity<Categoria> Put (@Valid @RequestBody Categoria categoria){ // faz requisição da body
+		return ResponseEntity.ok(repository.save(categoria));	 // atualiza a requisição
 	}
 	
 	@DeleteMapping("/{id}") // metodo para apagar um id ,vai usar a mesma rota principal
