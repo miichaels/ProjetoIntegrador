@@ -39,6 +39,8 @@ public class Produto {
 	@NotBlank
 	private String foto;
 	
+	
+
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
@@ -91,5 +93,11 @@ public class Produto {
 		this.categoria = categoria;
 	}
 		
-	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 }
