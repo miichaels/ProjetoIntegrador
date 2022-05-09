@@ -16,8 +16,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
-@Table(name = "tb_usuario")
+@Entity // Faz o objeto virar uma table no BD
+@Table(name = "tb_usuario") // Dá um nome para a tabela no meu banco de dados
 public class Usuario {
 		
 		@Id // Definir a coluna de id como chave primaria
@@ -27,20 +27,20 @@ public class Usuario {
 		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
 		private String nome;
 
-		@NotBlank
+		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
 		private String email_usuario;
 		
 		@NotNull // Define que o campo não pode ter espaços vazios
 		@Size (min=11, max=11)
 		private int cpf;
 		
-		@NotBlank
+		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
 		private String data_nascimento;
 		
-		@NotBlank
+		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
 		private String senha;
 		
-		@NotNull
+		@NotNull // Define que o campo não pode ter espaços vazios
 		private boolean voluntario;
 		
 		@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) // Um usuário para vários produtos

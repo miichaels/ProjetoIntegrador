@@ -26,7 +26,7 @@ public class Categoria {
 	@Size(min = 3, max = 100, message = "O campo deve ter no minimo 3 caracteres e no maximo 100 caracteres")
 	private String produtos;
 
-	@NotBlank
+	@NotBlank// Define que o campo é obrigatorio
 	@Size(min = 3, max = 100, message = "O campo deve ter no minimo 3 caracteres e no maximo 100 caracteres")
 	private String cursos;
 
@@ -34,7 +34,7 @@ public class Categoria {
 	// uma categoria para muitos produtos, ligacao com
 	// a tabela produtos, cascade remove a lista de
 	// um looping
-	@JsonIgnoreProperties("categoria") // recursividade
+	@JsonIgnoreProperties("categoria") // recursividade Ignora o termo usuário na busca
 	private List<Produto> produto;
 
 	// Métodos - O método getter retorna o valor do atributo.

@@ -14,39 +14,39 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
-@Table(name = "tb_produtos")
+@Entity // Faz o objeto virar uma table no BD
+@Table(name = "tb_produto") // Dá um nome para a tabela no meu banco de dados
 public class Produto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id// Definir a coluna de id como chave primaria
+	@GeneratedValue(strategy = GenerationType.IDENTITY)// Equivalente ao auto_increment no mysql
 	private Long id;
 
-	@NotBlank
+	@NotBlank// Define que o campo não pode ter espaços vazios e em branco
 	@Size(min=3, max=255, message = "O campo deve ter no minimo 3 caracteres e no maximo 255 caracteres")
 	private String nome;
 
-	@NotBlank
+	@NotBlank // Define que o campo não pode ter espaços vazios
 	@Size(min=3, max=255, message = "O campo deve ter no minimo 3 caracteres e no maximo 255 caracteres")
 	private String descricao;
 	
-	@NotNull
+	@NotNull // Define que o campo não pode ter espaços vazios
 	private int quantidade;
 	
-	@NotNull
+	@NotNull // Define que o campo não pode ter espaços vazios
 	private BigDecimal preco;
 	
-	@NotBlank
+	@NotBlank // Define que o campo não pode ter espaços vazios
 	private String foto;
 	
 	
 
-	@ManyToOne
-	@JsonIgnoreProperties("produto")
+	@ManyToOne // Varios produtos com um usuario
+	@JsonIgnoreProperties("produto") // recursividade - Ignora o termo usuário na busca
 	private Categoria categoria;
 	
-	@ManyToOne
-	@JsonIgnoreProperties("produto")
+	@ManyToOne // Varios produtos com um usuario
+	@JsonIgnoreProperties("produto") // recursividade - Ignora o termo usuário na busca
 	private Usuario usuario;
 
 	public Long getId() {
