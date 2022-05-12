@@ -1,6 +1,7 @@
 package com.generation.projetovida.model;
 
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,14 +28,13 @@ public class Usuario {
 		private String nome;
 
 		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
-		private String email_usuario;
+		private String usuario;
 		
 		@NotNull // Define que o campo não pode ter espaços vazios
-		@Size (min=11, max=11)
-		private int cpf;
+		private BigInteger cpf;
 		
 		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
-		private String data_nascimento;
+		private String nascimento;
 		
 		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
 		private String senha;
@@ -46,7 +45,7 @@ public class Usuario {
 		@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) // Um usuário para vários produtos
 		@JsonIgnoreProperties("usuario") // recursividade - Ignora o termo usuário na busca
 		private List<Produto> produto;
-		
+
 		//Getters and Setters - Permite que outras classes podem intereragir com os atributos privados dessa classe
 		public Long getId() {
 			return id;
@@ -64,28 +63,28 @@ public class Usuario {
 			this.nome = nome;
 		}
 
-		public String getEmail_usuario() {
-			return email_usuario;
+		public String getUsuario() {
+			return usuario;
 		}
 
-		public void setEmail_usuario(String email_usuario) {
-			this.email_usuario = email_usuario;
+		public void setUsuario(String usuario) {
+			this.usuario = usuario;
 		}
 
-		public int getCpf() {
+		public BigInteger getCpf() {
 			return cpf;
 		}
 
-		public void setCpf(int cpf) {
+		public void setCpf(BigInteger cpf) {
 			this.cpf = cpf;
 		}
 
-		public String getData_nascimento() {
-			return data_nascimento;
+		public String getNascimento() {
+			return nascimento;
 		}
 
-		public void setData_nascimento(String data_nascimento) {
-			this.data_nascimento = data_nascimento;
+		public void setNascimento(String nascimento) {
+			this.nascimento = nascimento;
 		}
 
 		public String getSenha() {
@@ -103,5 +102,16 @@ public class Usuario {
 		public void setVoluntario(boolean voluntario) {
 			this.voluntario = voluntario;
 		}
-		
+
+		public List<Produto> getProduto() {
+			return produto;
+		}
+
+		public void setProduto(List<Produto> produto) {
+			this.produto = produto;
+		}
 }
+		
+		
+		
+		
