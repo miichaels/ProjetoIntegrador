@@ -25,7 +25,7 @@ import com.generation.projetovida.service.UsuarioService;
 
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class UsuarioController {

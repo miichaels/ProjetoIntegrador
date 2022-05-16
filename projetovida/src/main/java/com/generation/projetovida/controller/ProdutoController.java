@@ -22,50 +22,47 @@ import com.generation.projetovida.repository.ProdutoRepository;
 
 @RestController
 @RequestMapping("/produto")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
-	
+
+
+
 	@Autowired
 	private ProdutoRepository repository;
-	
-	@GetMapping 
-	public ResponseEntity<List<Produto>> GetAll (){ 
+
+	@GetMapping("/all")
+	public ResponseEntity<List<Produto>> GetAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Produto> GetById (@PathVariable Long id){
-		return repository.findById(id)
-				.map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.notFound().build());
-		}
-	
-	@GetMapping("/nome/{nome}") 
-	public ResponseEntity<List<Produto>> GetByCategoria (@PathVariable String nome){ 
-		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome)); 
-	}
-	
-	@PostMapping 
-	public ResponseEntity<Produto> Post (@Valid @RequestBody Produto produto){ 
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto)); 
-	}
-	
-	@PutMapping 
-	public ResponseEntity<Produto> Put (@Valid @RequestBody Produto produto){ 
-		return repository.findById(produto.getId())
-				.map(resposta -> ResponseEntity.ok().body(repository.save(produto)))
-				.orElse(ResponseEntity.notFound().build());
-			}
-	
-	@DeleteMapping("/{id}") 
-	public ResponseEntity<?> ProdutoModel(@PathVariable Long id) {
-		return repository.findById(id)
-		.map(resposta -> {
-			repository.deleteById(id);
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		})
-		.orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Produto> GetById(@PathVariable Long id) {
+		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
 
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Produto>> GetByCategoria(@PathVariable String nome) {
+		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
+	}
+
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Produto> Post(@Valid @RequestBody Produto produto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
+	}
+
+	@PutMapping
+	public ResponseEntity<Produto> Put(@Valid @RequestBody Produto produto) {
+		return repository.findById(produto.getId()).map(resposta -> ResponseEntity.ok().body(repository.save(produto)))
+				.orElse(ResponseEntity.notFound().build());
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteProduto(@PathVariable Long id) {
+
+		return repository.findById(id).map(resposta -> {
+			repository.deleteById(id);
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}).orElse(ResponseEntity.notFound().build());
+	}
 
 }
