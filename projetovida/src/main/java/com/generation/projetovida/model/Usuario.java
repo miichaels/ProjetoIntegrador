@@ -11,10 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity // Faz o objeto virar uma table no BD
 @Table(name = "tb_usuario") // Dá um nome para a tabela no meu banco de dados
@@ -27,8 +30,11 @@ public class Usuario {
 		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
 		private String nome;
 
-		@NotBlank // Define que o campo não pode ter espaços vazios e em branco
+		@Schema(example = "email@email.com.br")
+		@NotNull(message = "O atributo Usuário é Obrigatório!")
+		@Email (message = "O atributo Usuário deve ser um email válido!")
 		private String usuario;
+
 		
 		@NotNull // Define que o campo não pode ter espaços vazios
 		private BigInteger cpf;
@@ -111,7 +117,3 @@ public class Usuario {
 			this.produto = produto;
 		}
 }
-		
-		
-		
-		
