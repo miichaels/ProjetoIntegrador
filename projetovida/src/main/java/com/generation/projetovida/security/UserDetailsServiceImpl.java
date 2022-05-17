@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 		usuario.orElseThrow(()-> new UsernameNotFoundException(userName + "Usuário não encontrado"));
 		
-		//Atribui o resultado enocntrado no optional para alimentar o  UserDetails
+		//Atribui o resultado encontrado no optional para alimentar o UserDetails
 		return usuario.map(UserDetailsImpl::new).get();
 	}
 
